@@ -21,11 +21,11 @@ let products =[
     } 
 ];
 
-for (let i=0; i< carts.length; i++){
+for(let i=0; i< carts.length; i++){
     carts[i].addEventListener('click', () => {
     cartNumbers(products[i]);
     totalCost(products[i]);
-    })
+    });
 }
 
 function onLoadCartNumbers() {
@@ -85,10 +85,46 @@ function totalCost(product){
         cartCost = parseInt(cartCost);
         localStorage.setItem("totalCost", cartCost + product.price);
         product.price
-    }else{
+    } else {
         localStorage.setItem("totalCost", product.price);
     }
 
+}
+function displayCart(){
+    let cartItems = localStorage.getItem("productsInCart");
+    cartItems = JSON.parse(cartItems)
+  
+    let productContainer = document.querySelector(".products");
+   
+    let cartCost = localStorage.getItem('totalCost');
+
+    console.log(cartItems);
+
+    if(cartItems && productContainer) {
+        productContainer.innerHTML= '';
+        Object.values(cartItems).map(item => {
+        productContainer.innerHTML += `
+        <div class="product">
+            <ion-icon name="close-circle"></ion-icon><img src="./images/${item.tag}.jpg">
+            <span>${item.name}</span>
+        </div>
+        <div class="price">$${item.price}USD</div>
+        <div class="quantity">
+            <ion-icon class="decrease " name="arrow-dropleft-circle"></ion-icon>
+                <span>${item.inCart}</span>
+            </div>
+            <div clas="total">$${item.inCart*item.price}USD</div>`;
+        });
+
+        productContainer.innerHTML +=`
+        <div class="basketTotalContainer">
+            <h4 class= "basketTotalTitle">Basket Total</h4>
+            <h4 class="basketTotal">$${cartCost}USD</h4>
+        </div>`;
+
+        deleteButtons();
+        manageQuantity();
+    }
 }
 
 
