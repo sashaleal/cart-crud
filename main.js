@@ -18,7 +18,7 @@ let products =[
     tag:"surgical",
     price:15,
     inCart: 0
-    }
+    } 
 ];
 
 for (let i=0; i< carts.length; i++){
@@ -58,6 +58,12 @@ function setItems(product){
     cartItems = JSON.parse(cartItems);
 
     if(cartItems != null){
+        if(cartItems[product.tag] == undefined){
+          cartItems ={
+              ...cartItems, 
+              [product.tag]: product
+          }
+        }
         cartItems[product.tag].inCart+= 1;
     }else{
         product.inCart = 1;
@@ -65,7 +71,6 @@ function setItems(product){
         [product.tag]: product
         }
     }
-
 
 
     localStorage.setItem("productsInCart", JSON.stringify(cartItems));
