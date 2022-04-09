@@ -73,8 +73,7 @@ li a {
     text-decoration: none;
 }
 
-.container,
-.container-products {
+.container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
