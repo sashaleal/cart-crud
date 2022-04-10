@@ -15,7 +15,7 @@ let products = [
     },
     {
     name:"Patient gown",
-    tag:"surgical",
+    tag:"patient",
     price:15,
     inCart: 0
     } 
